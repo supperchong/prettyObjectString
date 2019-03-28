@@ -1,5 +1,5 @@
 {
-  "name": "prettyjson",
+  "name": "prettyObjectString",
   "version": "1.0.0",
   "description": "format pretty javascript object string",
   "main": "index.js",
@@ -10,6 +10,6 @@
   "scripts": {
     "test": "node ./test/test.js"
   },
-  "author": "",
+  "author": "supperchong@gmail.com",
   "license": "ISC"
 }
