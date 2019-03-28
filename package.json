@@ -1,0 +1,15 @@
+{
+  "name": "prettyjson",
+  "version": "1.0.0",
+  "description": "format pretty javascript object string",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./test/test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
