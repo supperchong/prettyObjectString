@@ -1,5 +1,5 @@
 {
-  "name": "prettyObjectString",
+  "name": "pretty-object-string",
   "version": "1.0.0",
   "description": "format pretty javascript object string",
   "main": "index.js",
@@ -8,8 +8,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node ./test/test.js"
+    "test": "mocha"
   },
   "author": "supperchong@gmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2"
+  }
 }
