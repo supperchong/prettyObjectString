@@ -98,6 +98,7 @@ describe('scan json error',()=>{
                 }catch(err){
                     console.log(err)
                     assert.equal(err.code,error.code)
+                    return
                 }
             }
         })
@@ -144,5 +145,34 @@ describe('test scan state',()=>{
         let scan=new Scan(chars)
         let state=scan.getStateAt(originStr.length-1)
         assert.equal(Kind[state],Kind[scanEnd])
+    })
+    it('begin scan array',()=>{
+        let originStr='['
+        let chars = getCharArrs(originStr)
+        let scan=new Scan(chars)
+        let state=scan.getStateAt(originStr.length-1)
+        assert.equal(state,scanBeginArray)
+    })
+    it('scan array end',()=>{
+        let originStr='[]'
+        let chars = getCharArrs(originStr)
+        let scan=new Scan(chars)
+        let state=scan.getStateAt(originStr.length-1)
+        assert.equal(state,scanEndArray)
+    })
+    it('scan compose array with string',()=>{
+        let originStr='[\'name\',"age"]'
+        let chars = getCharArrs(originStr)
+        let scan=new Scan(chars)
+        let state=scan.getStateAt(originStr.length-1)
+        assert.equal(state,scanEndArray)
+    })
+    it('scan compose array with string',()=>{
+        let originStr='[3,1,\'name\''
+        let chars = getCharArrs(originStr)
+        let scan=new Scan(chars)
+        let state=scan.getStateAt(originStr.length-1)
+        console.log(Kind[state])
+        assert.equal(state,scanSingleQuotationValueEnd)
     })
 })
