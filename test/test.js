@@ -8,10 +8,15 @@ let a = `[{
   },
   attributes:[]
 }],`
-
+const MyError=require('../lib/myError')
+const {CommonCodes,getMsg}=require('../lib/errorCode')
 const prettyJson = require('../lib/index')
+try{
+    const out = prettyJson(a)
+}catch(err){
+    console.log(err)
+}
 
-const out = prettyJson(a)
 // console.log(out)
 const Scan = require('../lib/scan')
 const assert = require('assert')
