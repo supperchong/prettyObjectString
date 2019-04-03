@@ -42,7 +42,7 @@ const {
     scanDoubleQuotesValueEnd,
     scanEmptyKey,
     scanEmptyKeyEnd,
-
+    scanSingleCharEmptyKeyEnd,
     scanEnd,
     scanError
 } = Kind
