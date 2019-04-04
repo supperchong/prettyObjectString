@@ -8,6 +8,11 @@ describe('pretty js string',()=>{
         let out=JsToJson(str)
         assert.equal(out,'{\n\t"name": "age"\n}')
     })
+    it('pretty single quotation object',()=>{
+        const str='{\'name\':\'li\'}'       
+        let out=JsToJson(str)
+        assert.equal(out,'{\n\t"name": "li"\n}')
+    })
     it('pretty array',()=>{
         const str='[{name:\'age\'},null,"people",321,true,false]'       
         let out=JsToJson(str)
