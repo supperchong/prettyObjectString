@@ -8,13 +8,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "nyc  mocha"
   },
   "author": "supperchong@gmail.com",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0"
   }
 }
