@@ -1,5 +1,10 @@
 # prettyJson
 
+[![Test coverage][codecov-image]][codecov-url]
+
+[codecov-image]: https://codecov.io/gh/supperchong/prettyObjectString/branch/master/graphs/badge.svg
+[codecov-url]: https://codecov.io/gh/supperchong/prettyObjectString
+
 prettyJson can format javascript string like this
 
 ```js
