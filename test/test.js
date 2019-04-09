@@ -18,4 +18,9 @@ describe('pretty js string',()=>{
         let out=JsToJson(str)
         assert.equal(out,'[\n\t{\n\t\t"name": "age"\n\t},\n\tnull,\n\t"people",\n\t321,\n\ttrue,\n\tfalse\n]')
     })
+    it('pretty escape characters',()=>{
+        const str='[{name:"\\"xiaohuang\\"}]"}]'       
+        let out=JsToJson(str)
+        assert.equal(out,'[\n\t{\n\t\t"name": "\\"xiaohuang\\"}]"\n\t}\n]')
+    })
 })
