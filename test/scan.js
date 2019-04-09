@@ -4,13 +4,14 @@ const MyError=require('../lib/myError')
 const {CommonCodes,getMsg}=require('../lib/errorCode')
 const { Kind, ParseState, ObjectKeyState } = require('../lib/constants')
 const valueExamples = [
-    ['string', '"name"'],
+    ['string', '"name\\u1111"'],
     ['number', '112'],
-    ['object', '{"name":"li"}'],
+    ['object', '{"name":"li",\'age\':\'21\\\'\\u1234\'}'],
     ['array', '["name",null]'],
     ['true', 'true'],
     ['false', 'false'],
-    ['null', 'null']
+    ['null', 'null'],
+    ['array','[-0.34e-34,-12.34e+34,-0e+3,-0e9,-1]']
 ]
 const Errors=[
     ['"name",',CommonCodes.EndError],
@@ -18,7 +19,29 @@ const Errors=[
     [`{
         name:1,
         age:1,
-    }`,CommonCodes.InvalidValue]
+    }`,CommonCodes.InvalidValue],
+    ['"name"{',CommonCodes.EndError],
+    ['nl',CommonCodes.InvalidValue],
+    ['nua',CommonCodes.InvalidValue],
+    ['nula',CommonCodes.InvalidValue],
+    ['ff',CommonCodes.InvalidValue],
+    ['faf',CommonCodes.InvalidValue],
+    ['falf',CommonCodes.InvalidValue],
+    ['falsf',CommonCodes.InvalidValue],
+    ['ta',CommonCodes.InvalidValue],
+    ['tra',CommonCodes.InvalidValue],
+    ['trua',CommonCodes.InvalidValue],
+    ['"\\uz"',CommonCodes.InvalidValue],
+    ['"\\u1z"',CommonCodes.InvalidValue],
+    ['"\\u11z"',CommonCodes.InvalidValue],
+    ['"\\u111z"',CommonCodes.InvalidValue],
+    ['"\\z"',CommonCodes.InvalidValue],
+    ['{name:asw',CommonCodes.InvalidValue],
+    ['["name"asw',CommonCodes.InvalidValue],
+    ['{"name"asw',CommonCodes.InvalidValue],
+    ['{"name":"li"asw',CommonCodes.InvalidValue],
+    ['{2name:"li"}',CommonCodes.InvalidObjectKey],
+
 ]
 const {
     scanContinue,
@@ -62,16 +85,12 @@ describe('scan json value', () => {
     // })
     valueExamples.forEach(([type, example]) => {
         it(`scan ${type}`, () => {
-            let scan=new Scan(example)
-            let chars = []
-            for (const c of example) {
-                chars.push(c)
-            }
+            let chars = getCharArrs(example)
+            let scan=new Scan(chars)
             for (let i = 0; i < chars.length; i++) {
                 let c = chars[i]
                 let n = chars[i + 1]
-    
-                let v = scan.step(c, n)
+                scan.step(c, n,i)
             }
         })
     })
@@ -85,10 +104,7 @@ describe('scan json error',()=>{
     Errors.forEach(([example,error])=>{
         it(`expect ${error.msg}`,()=>{
             
-            let chars = []
-            for (const c of example) {
-                chars.push(c)
-            }
+            let chars = getCharArrs(example)
             let scan=new Scan(chars)
             for (let i = 0; i < chars.length; i++) {
                 let c = chars[i]
@@ -96,7 +112,6 @@ describe('scan json error',()=>{
                 try{
                     scan.step(c, n,i)
                 }catch(err){
-                    console.log(err)
                     assert.equal(err.code,error.code)
                     return
                 }
@@ -172,7 +187,6 @@ describe('test scan state',()=>{
         let chars = getCharArrs(originStr)
         let scan=new Scan(chars)
         let state=scan.getStateAt(originStr.length-1)
-        console.log(Kind[state])
         assert.equal(state,scanSingleQuotationValueEnd)
     })
 })
