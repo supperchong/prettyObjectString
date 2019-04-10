@@ -1,4 +1,4 @@
-# prettyJson
+# PrettyJson
 
 [![NPM version][npm-image]][npm-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -10,7 +10,11 @@
 [codecov-url]: https://codecov.io/gh/supperchong/prettyObjectString
 [download-image]: https://img.shields.io/npm/dm/pretty-object-string.svg?style=flat-square
 [download-url]: https://npmjs.org/package/pretty-object-string
-prettyJson can format javascript string like this
+
+## Usage
+There is a vscode extension [Pretty js/json](https://marketplace.visualstudio.com/itemdetails?itemName=supperchong.pretty-json#review-details)  use this package to format pretty json or javascript object string.
+
+PrettyJson can format javascript string like this.
 
 ```js
 let a = `{
