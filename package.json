@@ -7,10 +7,15 @@
     "lib": "lib",
     "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supperchong/prettyObjectString"
+  },
   "scripts": {
     "test": "nyc  mocha",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
+  "keywords":["pretty","json","object","javascript"],
   "author": "supperchong@gmail.com",
   "license": "ISC",
   "dependencies": {},
