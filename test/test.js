@@ -55,4 +55,10 @@ describe('pretty js string', () => {
         let out = JsToJson(str, { delComment: true })
         assert.equal(out, '{\n\t"name": "li"\n}')
     })
+    it('set custom indent', () => {
+        const str = '{"name":"li"\n}'
+        const indent = ' '.repeat(4)
+        let out = JsToJson(str, { indent })
+        assert.equal(out, `{\n${indent}"name": "li"\n}`)
+    })
 })
