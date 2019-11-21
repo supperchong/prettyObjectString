@@ -12,15 +12,21 @@
     "url": "git+https://github.com/supperchong/prettyObjectString"
   },
   "scripts": {
-    "test": "nyc  mocha",
+    "test": "mocha",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
-  "keywords":["pretty","json","object","javascript"],
+  "keywords": [
+    "pretty",
+    "json",
+    "object",
+    "javascript"
+  ],
   "author": "supperchong@gmail.com",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^6.6.0",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0"
   }
