@@ -1,6 +1,6 @@
 {
   "name": "pretty-object-string",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "format pretty javascript object string",
   "main": "index.js",
   "directories": {
