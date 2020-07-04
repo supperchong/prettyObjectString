@@ -12,7 +12,24 @@
 [download-url]: https://npmjs.org/package/pretty-object-string
 
 ## Usage
-There is a vscode extension [Pretty js/json](https://marketplace.visualstudio.com/itemdetails?itemName=supperchong.pretty-json#review-details)  use this package to format pretty json or javascript object string.
+
+There is a vscode extension [Pretty js/json](https://marketplace.visualstudio.com/itemdetails?itemName=supperchong.pretty-json#review-details) use this package to format pretty json or javascript object string.
+
+## Getting Started
+
+### install
+
+With yarn
+
+```sh
+yarn add pretty-object-string
+```
+
+or using npm
+
+```sh
+npm install pretty-object-string
+```
 
 PrettyJson can format javascript string like this.
 
@@ -27,13 +44,13 @@ let a = `{
     'name':"校长",
     age:10
   }]
-}`;
+}`
 
-const prettyJson = require("../lib/index");
+const prettyJson = require('pretty-object-string')
 
-const out = prettyJson(a);
-console.log(out);
-/** 
+const out = prettyJson(a)
+console.log(out)
+/**
  * {
  *	"code": 200,
  *	"msg": "success",
@@ -49,4 +66,20 @@ console.log(out);
  *	]
  * }
  */
+```
+
+### options
+
+```js
+const prettyJson = require('pretty-object-string')
+
+const a = { name: 1 }
+const out = prettyJson(a, { indent: ' '.repeat(2) })
+console.log(out)
+```
+
+```json
+{
+  "name": 1
+}
 ```
