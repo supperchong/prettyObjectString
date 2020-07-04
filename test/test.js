@@ -73,6 +73,10 @@ describe('test getting index of partial valid js value  from start', () => {
   it('scan string', () => {
     let originStrs = [
       {
+        origin: '"a"',
+        expect: '"a"',
+      },
+      {
         origin: '"a" ,',
         expect: '"a"',
       },
