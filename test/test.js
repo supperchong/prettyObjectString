@@ -1,4 +1,5 @@
 const JsToJson = require('../lib/index')
+const parse = JsToJson.parse
 const assert = require('chai').assert
 
 describe('pretty js string', () => {
@@ -67,7 +68,7 @@ describe('test getting index of partial valid js value  from start', () => {
   it('scan array', () => {
     let origin = '["a",true,null,1.1],'
     let partialIndex = origin.length - 1
-    let index = JsToJson(origin, { partialIndex: true })
+    let { index } = parse(origin, { partialIndex: true })
     assert.equal(index, partialIndex)
   })
   it('scan string', () => {
@@ -106,7 +107,7 @@ describe('test getting index of partial valid js value  from start', () => {
       },
     ]
     originStrs.forEach(({ origin, expect }) => {
-      let index = JsToJson(origin, { partialIndex: true })
+      let { index } = parse(origin, { partialIndex: true })
       assert.equal(index, expect.length)
     })
   })
@@ -126,8 +127,55 @@ describe('test getting index of partial valid js value  from start', () => {
       },
     ]
     originStrs.forEach(({ origin, expect }) => {
-      let index = JsToJson(origin, { partialIndex: true })
+      let { index } = parse(origin, { partialIndex: true })
       assert.equal(index, expect.length)
+    })
+  })
+})
+
+describe('test compress', () => {
+  it('test compress', () => {
+    let originStrs = [
+      {
+        origin:
+          '[\n\t{\n\t\t"name": "age"\n\t},\n\tnull,\n\t"people",\n\t321,\n\ttrue,\n\tfalse\n]',
+        expect: '[{"name":"age"},null,"people",321,true,false]',
+      },
+      {
+        origin: '{\n\t"a": 1\n}',
+        expect: '{"a":1}',
+      },
+    ]
+    originStrs.forEach(({ origin, expect }) => {
+      let code = JsToJson(origin, { compress: true })
+      assert.equal(code, expect)
+    })
+  })
+})
+
+describe('test endOfLine', () => {
+  it('test crlf', () => {
+    let originStrs = [
+      {
+        origin: '{name:1}',
+        expect: '{\r\n\t"name": 1\r\n}',
+      },
+    ]
+    originStrs.forEach(({ origin, expect }) => {
+      let code = JsToJson(origin, { endOfLine: '\r\n' })
+      assert.equal(code, expect)
+    })
+  })
+  it('test lf', () => {
+    let originStrs = [
+      {
+        origin: '{name:1}',
+        expect: '{\n\t"name": 1\n}',
+      },
+    ]
+    originStrs.forEach(({ origin, expect }) => {
+      let code = JsToJson(origin, { endOfLine: '\n' })
+      assert.equal(code, expect)
     })
   })
 })
